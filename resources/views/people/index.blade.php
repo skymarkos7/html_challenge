@@ -31,6 +31,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
         .list-group-item form {
             display: inline;
@@ -47,6 +48,16 @@
         .person-info {
             display: flex;
             align-items: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .actions a, .actions form {
+            margin: 5px;
         }
     </style>
 </head>
@@ -69,17 +80,21 @@
                         <img src="{{ $person->avatar }}" alt="Avatar" class="avatar">
                         <span>{{ $person->name }} - {{ $person->email }}</span>
                     </div>
-                    <span>
+                    <div class="actions">
+                        <a href="{{ route('people.show', $person->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
                         <a href="{{ route('people.edit', $person->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</a>
                         <form action="{{ route('people.destroy', $person->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Excluir</button>
                         </form>
-                    </span>
+                    </div>
                 </li>
             @endforeach
         </ul>
     </div>
 </body>
 </html>
+<div class="text-center mt-4">
+    <a href="{{ url('/') }}" class="btn btn-secondary"><i class="fas fa-home"></i> Voltar ao Início</a>
+</div>
