@@ -30,10 +30,15 @@
             background-color: #007bff;
             border-color: #007bff;
         }
+
+        .btn-back {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="{{ route('people.index') }}" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
         <div class="card">
             <div class="text-center">
                 <img src="{{ $person->avatar }}" alt="Avatar" class="avatar">

@@ -65,11 +65,22 @@
         .back-button:hover {
             background-color: #5a6268;
         }
+
+        .btn-back {
+            margin-bottom: 20px;
+            background-color: #066cc4;
+            text-decoration: none;
+            padding: 10px !important;
+            border-radius : 8px;
+            font-weight: bold;
+            color: #fff;
+
+        }
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="window.location.href='{{ route('contacts.index') }}'">Voltar</button>
     <div class="container">
+        <a href="{{ route('people.index') }}" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
         <h1>Criar Novo Contato</h1>
         <form action="{{ route('contacts.store') }}" method="POST">
             @csrf

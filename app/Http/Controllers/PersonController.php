@@ -24,8 +24,11 @@ class PersonController extends Controller
      */
     public function create()
     {
-        // Retorna a view 'people.create' para criar uma nova pessoa
-        return view('people.create');
+        // Recupera todas as pessoas
+        $people = Person::all();
+
+        // Retorna a view 'contacts.create' com a lista de pessoas
+        return view('people.create', compact('people'));
     }
 
     /**
