@@ -99,8 +99,8 @@
                 <i class="fas fa-phone-alt"></i>
                 <p>Contatos</p>
             </a>
-
-            <a href="{{ route('contacts.perCountry') }}" class="link-card">
+            
+            <a href="{{ url('/statistics') }}" class="link-card">
                 <i class="fas fa-chart-pie"></i>
                 <p>Estatísticas</p>
             </a>
