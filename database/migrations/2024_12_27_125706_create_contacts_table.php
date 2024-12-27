@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
+            $table->string('country_code');
+            $table->string('number')->unique();
+            $table->foreignId('person_id')->constrained('people')->onDelete('cascade');
+            $table->unique(['country_code', 'number']);
             $table->timestamps();
-        });
+        });        
     }
 
     /**
