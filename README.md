@@ -7,60 +7,90 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este projeto é um sistema de gerenciamento de pessoas e contatos desenvolvido com o framework Laravel. Ele permite criar, visualizar, editar e excluir registros de pessoas e seus respectivos contatos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Estrutura do Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Modelos
 
-## Learning Laravel
+#### Person
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+O modelo `Person` representa uma pessoa no sistema. Ele possui os seguintes atributos:
+- `name`: Nome da pessoa.
+- `email`: E-mail da pessoa.
+- `avatar`: URL do avatar da pessoa.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+O modelo `Person` também possui um relacionamento `hasMany` com o modelo `Contact`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### Contact
 
-## Laravel Sponsors
+O modelo `Contact` representa um contato no sistema. Ele possui os seguintes atributos:
+- `country_code`: Código do país do número de telefone.
+- `number`: Número de telefone.
+- `person_id`: ID da pessoa associada ao contato.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+O modelo `Contact` possui um relacionamento `belongsTo` com o modelo `Person`.
 
-### Premium Partners
+### Controladores
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### PersonController
 
-## Contributing
+O `PersonController` gerencia as operações CRUD para o modelo `Person`. Ele possui os seguintes métodos:
+- `index()`: Exibe uma lista de todas as pessoas.
+- `create()`: Exibe o formulário para criar uma nova pessoa.
+- `store(Request $request)`: Armazena uma nova pessoa no banco de dados.
+- `show($id)`: Exibe os detalhes de uma pessoa específica.
+- `edit($id)`: Exibe o formulário para editar uma pessoa existente.
+- `update(Request $request, $id)`: Atualiza uma pessoa existente no banco de dados.
+- `destroy($id)`: Remove uma pessoa do banco de dados.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### ContactController
 
-## Code of Conduct
+O `ContactController` gerencia as operações CRUD para o modelo `Contact`. Ele possui os seguintes métodos:
+- `index()`: Exibe uma lista de todos os contatos.
+- `create()`: Exibe o formulário para criar um novo contato.
+- `store(Request $request)`: Armazena um novo contato no banco de dados.
+- `show($id)`: Exibe os detalhes de um contato específico.
+- `edit($id)`: Exibe o formulário para editar um contato existente.
+- `update(Request $request, $id)`: Atualiza um contato existente no banco de dados.
+- `destroy($id)`: Remove um contato do banco de dados.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Views
 
-## Security Vulnerabilities
+#### index.blade.php
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Exibe a lista de contatos. Cada contato é exibido com seu código do país, número de telefone e ID da pessoa associada. Também há opções para editar e excluir cada contato.
 
-## License
+#### index.blade.php-1
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Exibe a lista de pessoas. Cada pessoa é exibida com seu avatar, nome e e-mail. Também há opções para visualizar, editar e excluir cada pessoa.
+
+#### index.blade.php-2
+
+Página inicial do sistema de gerenciamento. Contém links para as seções de pessoas, contatos e estatísticas.
+
+#### edit.blade.php
+
+Formulário para editar um contato existente. Permite atualizar o código do país e o número de telefone.
+
+#### edit.blade.php-1
+
+Formulário para editar uma pessoa existente. Permite atualizar o nome e o e-mail da pessoa.
+
+#### show.blade.php
+
+Exibe os detalhes de uma pessoa específica, incluindo seu avatar, nome, e-mail, telefone e endereço. Também há opções para editar e excluir a pessoa.
+
+## Contribuindo
+
+Obrigado por considerar contribuir para o projeto! O guia de contribuição pode ser encontrado na [documentação do Laravel](https://laravel.com/docs/contributions).
+
+## Licença
+
+O framework Laravel é um software de código aberto licenciado sob a [licença MIT](https://opensource.org/licenses/MIT).
+
+## Referência do Projeto
+
+Confira o projeto em [https://marcoslourenco-lv2.recruitment.alfasoft.pt/](https://marcoslourenco-lv2.recruitment.alfasoft.pt/)
