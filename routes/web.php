@@ -1,18 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ContactController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// Rota para a página index
 Route::get('/', function () {
-    return view('welcome');
+    return view('index'); // Isso irá renderizar a view resources/views/index.blade.php
 });
+
+// Recursos para pessoas e contatos
+Route::resource('people', PersonController::class);
+Route::resource('contacts', ContactController::class);
+
+// Middleware de autenticação para edição/exclusão
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('contacts-per-country', [ContactController::class, 'contactsPerCountry'])->name('contacts.perCountry');
+});
+
+// Rotas de autenticação
+Auth::routes();
+
+// Rota para a página home após login
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
